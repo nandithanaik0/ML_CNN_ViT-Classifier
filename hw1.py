@@ -115,7 +115,7 @@ def valid_or_test_fn(model, loaders, criterion, device, valid_or_test):
 
 def plot_confusion_matrix(true_labels, predicted_labels, class_names):
     from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-    # TODO: Plot the confusion matrix, you can use the imported libraries above if desired
+
     cm = confusion_matrix(true_labels, predicted_labels, labels=range(len(class_names)))
 
     # Plot
@@ -132,9 +132,9 @@ def plot_confusion_matrix(true_labels, predicted_labels, class_names):
 def main():
     os.environ['CUDA_VISIBLE_DEVICES'] = '0'
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')    
-    num_epochs = 30 # TODO : Set a proper number of epochs (try multiple values -- should be at least 20)
-    learning_rate = 0.01# TODO : Set a proper learning rate (try multiple values)
-    batch_size = 16# TODO : Set a proper batch size (try multiple values)
+    num_epochs = 30 
+    learning_rate = 0.01
+    batch_size = 16
     num_classes = 10
     
     class_names = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
@@ -144,13 +144,13 @@ def main():
             'test': torch.utils.data.DataLoader(test_data, batch_size = batch_size, shuffle=True),
             'valid': torch.utils.data.DataLoader(valid_data, batch_size = batch_size, shuffle=True)}
     
-    # TODO : Define your model here
+
     #model = MLP_classifier(3, num_classes).to(device)
     model = CNN_classifier(3, num_classes).to(device)
     #model = ViTForCIFAR10(img_size=32, patch_size=4, embed_dim=192, depth=6, num_heads=3, mlp_ratio=4.0).to(device)
 
-    criterion = nn.CrossEntropyLoss() # TODO : Define your choice of loss function here, explain in report why you chose it
-    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate) # TODO : Define your choice of optimizer here, explain in report why you chose it
+    criterion = nn.CrossEntropyLoss() 
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate) 
     #optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
     
     train_losses = []
@@ -176,4 +176,5 @@ def main():
     print('\nFINISHED Training!\n' + '*' * 60)
 
 if __name__ == "__main__":
+
     main()
